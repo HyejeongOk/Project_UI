@@ -19,10 +19,9 @@ public class UIManager : MonoBehaviour
     // 카드 클릭하기
     public void OnCardClicked(int index)
     {
-        if(selectindex == -1)
-        {
-            return;
-        }
+        Debug.Log($"index = {index}");
+
+        selectindex = index;
 
         for(int i = 0; i < cards.Length; i++)
         {
@@ -38,7 +37,7 @@ public class UIManager : MonoBehaviour
             else
             {
                 // 작아진다
-                card.DOScale(Vector3.one * 5f, 1f).SetEase(easeType);
+                card.DOScale(Vector3.one * 1.5f, 1f).SetEase(easeType);
             }
         }
 
