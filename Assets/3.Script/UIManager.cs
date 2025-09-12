@@ -54,10 +54,10 @@ public class UIManager : MonoBehaviour
             return;
         }
 
-        StartCoroutine(RevealCard());
+        StartCoroutine(RevealCard_co());
     }
 
-    private IEnumerator RevealCard()
+    private IEnumerator RevealCard_co()
     {
         // 선택된 파티클만 꺼내기
         var selectParticle = particle[selectindex];
