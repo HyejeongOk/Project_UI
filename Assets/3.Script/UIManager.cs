@@ -10,8 +10,11 @@ public class UIManager : MonoBehaviour
     public GameObject[] cards;
     public GameObject[] cardbacks;
     public GameObject[] cardfronts;
+    public ParticleSystem[] particle;
 
     public Button selectBtn;    // 선택하기 버튼
+
+    public GameObject Fadebg;   // 검정 배경
 
     public int selectindex = -1;
     public Ease easeType;
@@ -19,8 +22,6 @@ public class UIManager : MonoBehaviour
     // 카드 클릭하기
     public void OnCardClicked(int index)
     {
-        Debug.Log($"index = {index}");
-
         selectindex = index;
 
         for(int i = 0; i < cards.Length; i++)
@@ -58,7 +59,16 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator RevealCard()
     {
-        yield return new WaitForSeconds(0.5f);
+        // 선택된 파티클만 꺼내기
+        var selectParticle = particle[selectindex];
+
+        // 파티클 껐다가 다시 재생
+        selectParticle.gameObject.SetActive(true);
+        selectParticle.Stop();
+
+        yield return new WaitForSeconds(0.1f);
+
+        selectParticle.Play();
 
         // 앞면 활성화, 뒷면 비활성화
         cardfronts[selectindex].SetActive(true);
@@ -66,5 +76,13 @@ public class UIManager : MonoBehaviour
 
         // 버튼 비활성화
         selectBtn.gameObject.SetActive(false);
+
+        // 파티클 비활성화
+        yield return new WaitForSeconds(1f);
+        selectParticle.gameObject.SetActive(false);
+
+        // Fade 전환
+        yield return new WaitForSeconds(1f);
+        Fadebg.SetActive(true);
     }
 }
