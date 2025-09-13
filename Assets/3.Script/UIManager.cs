@@ -136,6 +136,15 @@ public class UIManager : MonoBehaviour
         // 5. 선택 버튼 비활성화
         selectBtn.gameObject.SetActive(false);
 
-    }    
 
+        // 6. 결과창  선물 원상복구
+        // 닫힌 선물 활성화, 열린 선물 비활성화
+        gift.particle.gameObject.SetActive(false);
+        gift.GiftOpen.SetActive(false);
+        gift.GiftClose.SetActive(true);
+
+        // 결과창 비활성화
+        ResultPannel.SetActive(false);
+        Backbtn.SetActive(false);
+    }    
 }
