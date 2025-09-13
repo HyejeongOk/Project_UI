@@ -10,9 +10,11 @@ public class Gift : MonoBehaviour, IPointerClickHandler
     public GameObject GiftClose;
     public GameObject GiftOpen;
 
+    public UIManager ui_mgr;
+
     private void OnEnable()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         animator.Play("Gift");
     }
 
@@ -20,9 +22,14 @@ public class Gift : MonoBehaviour, IPointerClickHandler
     {
         if(GiftClose.activeInHierarchy)
         {
+            particle.Stop();
             particle.gameObject.SetActive(true);
+            particle.Play();
             GiftOpen.SetActive(true);
             GiftClose.SetActive(false);
+
+            StartCoroutine(ui_mgr.OpenResult_co());
+            
         }
     }
 }
