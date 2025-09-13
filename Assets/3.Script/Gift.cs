@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Gift : MonoBehaviour
+public class Gift : MonoBehaviour, IPointerClickHandler
 {
     private Animator animator;
     public ParticleSystem particle;
@@ -15,19 +16,13 @@ public class Gift : MonoBehaviour
         animator.Play("Gift");
     }
 
-    private void Start()
+    public void OnPointerClick(PointerEventData eventData)
     {
         if(GiftClose.activeInHierarchy)
         {
-            StartCoroutine(GiftParticle_co());
+            particle.gameObject.SetActive(true);
+            GiftOpen.SetActive(true);
+            GiftClose.SetActive(false);
         }
-    }
-
-    private IEnumerator GiftParticle_co()
-    {
-        yield return new WaitForSeconds(2.5f);
-
-        GiftOpen.SetActive(true);
-        GiftClose.SetActive(false);
     }
 }
