@@ -15,7 +15,7 @@ public class Gift : MonoBehaviour, IPointerClickHandler
     private void OnEnable()
     {
         animator = GetComponentInChildren<Animator>();
-        animator.Play("Gift");
+        animator.Play("Gift");  //Animator µø¿€
     }
 
     public void OnPointerClick(PointerEventData eventData)
